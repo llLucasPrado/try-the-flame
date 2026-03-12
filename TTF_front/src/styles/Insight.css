@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.insight-page {
+  width: 100%;
+  height: 100vh;
+
+  background-image: url("../assets/background/graveyard.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeInPage 0.8s ease;
+  overflow: hidden;
+}
+
+.insight-content {
+  width: min(1100px, 90vw);
+  height: min(92vh, 760px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  position: relative;
+}
+
+/* title */
+.insight-title-box {
+  width: min(620px, 70vw);
+  height: 110px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 24, 30, 0.82),
+    rgba(45, 52, 60, 0.45)
+  );
+
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.45),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(3px);
+  position: relative;
+}
+
+.insight-title-box::before,
+.insight-title-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateY(-50%);
+}
+
+.insight-title-box::before {
+  left: 24px;
+}
+
+.insight-title-box::after {
+  right: 24px;
+}
+
+.insight-title {
+  font-family: "Cinzel", serif;
+  font-size: 2.3rem;
+  letter-spacing: 0.26em;
+  color: #f1f1f1;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.18),
+    0 0 16px rgba(255, 255, 255, 0.08);
+  margin: 0;
+}
+
+/* cards area */
+.insight-grid {
+  width: min(980px, 85vw);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 26px;
+  align-items: stretch;
+}
+
+.right-cards {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.hover-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 108px;
+  border: 1px solid rgba(210, 210, 210, 0.22);
+  background: rgba(14, 16, 20, 0.12);
+
+  backdrop-filter: blur(1px);
+
+  cursor: pointer;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.world-card {
+  min-height: 384px;
+}
+
+.hover-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: var(--card-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s ease;
+}
+
+.hover-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 8, 8, 0.14),
+    rgba(8, 8, 8, 0.42)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.08),
+    0 0 30px rgba(120, 140, 170, 0.08);
+}
+
+.hover-card:hover::before,
+.hover-card:hover::after {
+  opacity: 1;
+}
+
+.hover-card:hover::before {
+  transform: scale(1);
+}
+
+.hover-card-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hover-card-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.95rem;
+  letter-spacing: 0.16em;
+  color: #ececec;
+  text-shadow:
+    0 0 6px rgba(0, 0, 0, 0.65),
+    0 0 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.hover-card:hover .hover-card-title {
+  transform: scale(1.03);
+}
+
+/* go back - enquadramento */
+.go-back-button {
+  margin-top: 4px;
+  align-self: flex-end;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-family: "Cinzel", serif;
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  color: #d8d8d8;
+
+  padding: 8px 4px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.go-back-button:hover {
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  body,
+  #root {
+    overflow: auto;
+  }
+
+  .insight-page {
+    min-height: 100vh;
+    height: auto;
+    padding: 24px 0;
+  }
+
+  .insight-content {
+    width: min(92vw, 1100px);
+    height: auto;
+  }
+
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .world-card {
+    min-height: 220px;
+  }
+
+  .insight-title-box {
+    width: 100%;
+    height: 96px;
+  }
+
+  .insight-title {
+    font-size: 1.6rem;
+    letter-spacing: 0.14em;
+    text-align: center;
+  }
+
+  .hover-card-title {
+    font-size: 1.4rem;
+  }
+
+  .go-back-button {
+    align-self: center;
+  }
+}
