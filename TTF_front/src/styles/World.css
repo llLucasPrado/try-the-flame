@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.world-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  background-image: url("../assets/background/knightWall.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: worldFadeIn 0.8s ease;
+}
+
+.world-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 8, 12, 0.28);
+}
+
+.world-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1000px, 88vw);
+  height: min(88vh, 700px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* TÍTULO */
+.world-title-box {
+  width: min(700px, 72vw);
+  height: 95px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 24, 30, 0.8),
+    rgba(45, 52, 60, 0.38)
+  );
+
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.45),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+
+  backdrop-filter: blur(3px);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.world-title-box::before,
+.world-title-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: translateY(-50%);
+}
+
+.world-title-box::before {
+  left: 24px;
+}
+
+.world-title-box::after {
+  right: 24px;
+}
+
+.world-title {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  letter-spacing: 0.18em;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.18),
+    0 0 16px rgba(255, 255, 255, 0.08);
+
+  white-space: nowrap;
+}
+
+/* QUADRO DA LORE */
+.world-lore-box {
+  width: min(860px, 78vw);
+  height: 430px;
+  padding: 28px 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(18, 22, 28, 0.22);
+
+  box-shadow:
+    0 0 24px rgba(0, 0, 0, 0.35),
+    inset 0 0 30px rgba(255, 255, 255, 0.03);
+
+  backdrop-filter: blur(5px);
+  overflow: auto;
+}
+
+.world-lore-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.world-lore-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.world-lore-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.world-lore-text {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  color: rgba(240, 240, 240, 0.92);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+}
+
+/* BOTÃO BACK */
+.world-back-button {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  color: #d8d8d8;
+  padding: 6px 4px;
+
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.world-back-button:hover {
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+@keyframes worldFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(1.01);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  body,
+  #root {
+    overflow: auto;
+  }
+
+  .world-page {
+    min-height: 100vh;
+    height: auto;
+    padding: 24px 0;
+  }
+
+  .world-content {
+    width: min(92vw, 1100px);
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .world-title-box {
+    width: 100%;
+    height: 90px;
+  }
+
+  .world-title {
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .world-lore-box {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    padding: 22px;
+    overflow: visible;
+  }
+
+  .world-lore-text {
+    font-size: 1.1rem;
+    line-height: 1.65;
+  }
+
+  .world-back-button {
+    align-self: center;
+  }
+}

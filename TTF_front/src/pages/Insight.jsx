@@ -18,7 +18,12 @@ export default function Insight() {
         </div>
 
         <div className="insight-grid">
-          <HoverCard label="World" image={worldImg} className="world-card" />
+          <HoverCard
+            label="World"
+            image={worldImg}
+            className="world-card"
+            onClick={() => navigate("/world")}
+          />
 
           <div className="right-cards">
             <HoverCard label="Enemies" image={enemiesImg} />
@@ -28,7 +33,7 @@ export default function Insight() {
         </div>
 
         <button className="go-back-button" onClick={() => navigate("/")}>
-          go back
+          Back
         </button>
       </div>
     </div>
