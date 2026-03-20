@@ -26,7 +26,11 @@ export default function Insight() {
           />
 
           <div className="right-cards">
-            <HoverCard label="Enemies" image={enemiesImg} />
+            <HoverCard
+              label="Enemies"
+              image={enemiesImg}
+              onClick={() => navigate("/enemies")}
+            />
             <HoverCard label="Maps" image={mapsImg} />
             <HoverCard label="Heroes" image={heroesImg} />
           </div>
