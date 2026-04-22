@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap");
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.heroes-page {
+  width: 100%;
+  height: 100vh;
+
+  background-image: url("../assets/background/graveyard.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+  animation: heroesFadeIn 0.8s ease;
+}
+
+.heroes-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 16, 0.42);
+}
+
+.heroes-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1300px, 95vw);
+  height: min(90vh, 700px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.heroes-container {
+  display: flex;
+  gap: 25px;
+
+  padding: 15px 20px;
+
+  background: rgba(20, 25, 30, 0.25);
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.03);
+}
+
+.hero-card {
+  width: 260px;
+  height: 420px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.heroes-back-button {
+  align-self: flex-end;
+  margin-right: 14px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  color: #dcdcdc;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.heroes-back-button:hover {
+  color: #ffffff;
+  transform: translateX(-5px);
+}
+
+@keyframes heroesFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(1.01);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  body,
+  #root {
+    overflow: auto;
+  }
+
+  .heroes-page {
+    min-height: 100vh;
+    height: auto;
+    padding: 24px 0;
+  }
+
+  .heroes-content {
+    width: min(94vw, 1100px);
+    height: auto;
+  }
+
+  .heroes-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .hero-card {
+    width: 170px;
+    height: 290px;
+  }
+
+  .heroes-back-button {
+    align-self: center;
+    margin-right: 0;
+  }
+}

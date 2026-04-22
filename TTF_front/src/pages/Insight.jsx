@@ -32,7 +32,7 @@ export default function Insight() {
               onClick={() => navigate("/enemies")}
             />
             <HoverCard label="Maps" image={mapsImg} onClick={() => navigate("/maps")} />
-            <HoverCard label="Heroes" image={heroesImg} />
+            <HoverCard label="Heroes" image={heroesImg} onClick={() => navigate("/heroes")} />
           </div>
         </div>
 
