@@ -3,6 +3,34 @@ import { useEffect, useState } from "react";
 import EnemyCard from "../components/EnemyCard";
 import "../styles/Enemies.css";
 
+const firstEnemyImages = [
+  "ratoCarnical.jpeg",
+  "espiritoVigiado.jpeg",
+  "corvoVigia.jpeg",
+];
+
+const lastEnemyImages = [
+  "serpenteArquiveneno.jpeg",
+  "reiRato.jpeg",
+  "zumbiSPraga.jpeg",
+];
+
+function getEnemyOrder(enemy, originalIndex) {
+  const firstIndex = firstEnemyImages.indexOf(enemy.image);
+
+  if (firstIndex !== -1) {
+    return firstIndex;
+  }
+
+  const lastIndex = lastEnemyImages.indexOf(enemy.image);
+
+  if (lastIndex !== -1) {
+    return 1000 + lastIndex;
+  }
+
+  return 100 + originalIndex;
+}
+
 export default function Enemies() {
   const navigate = useNavigate();
   const [selectedEnemyId, setSelectedEnemyId] = useState(null);
@@ -15,10 +43,20 @@ export default function Enemies() {
         const response = await fetch("http://localhost:3001/api/enemies");
         const data = await response.json();
 
-        const formattedEnemies = data.map((enemy) => ({
-          ...enemy,
-          image: `/enemies/${enemy.image}`,
-        }));
+        const formattedEnemies = data
+          .map((enemy, index) => ({
+            ...enemy,
+            originalIndex: index,
+          }))
+          .sort(
+            (a, b) =>
+              getEnemyOrder(a, a.originalIndex) -
+              getEnemyOrder(b, b.originalIndex),
+          )
+          .map(({ originalIndex, ...enemy }) => ({
+            ...enemy,
+            image: `/enemies/${enemy.image}`,
+          }));
 
         setEnemies(formattedEnemies);
       } catch (error) {
@@ -53,10 +91,8 @@ export default function Enemies() {
           <h1 className="enemies-title">Enemies</h1>
         </div>
 
-        <div className={`enemies-panels ${selectedEnemy ? "is-open" : ""}`}>
-          <div
-            className={`enemies-grid-wrapper ${selectedEnemy ? "compact" : ""}`}
-          >
+        <div className="enemies-panels">
+          <div className="enemies-grid-wrapper">
             <div className="enemies-grid">
               {enemies.map((enemy) => (
                 <EnemyCard

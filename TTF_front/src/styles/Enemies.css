@@ -34,7 +34,7 @@ body,
 .enemies-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 10, 14, 0.34);
+  background: rgba(8, 10, 14, 0.38);
 }
 
 .enemies-content {
@@ -120,12 +120,9 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 18px;
-  min-height: 0;
-}
 
-.enemies-panels.is-open {
-  align-items: center;
+  position: relative;
+  min-height: 0;
 }
 
 .enemies-grid-wrapper {
@@ -145,14 +142,11 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition:
-    width 0.35s ease,
-    transform 0.35s ease;
 }
 
 .enemies-grid-wrapper.compact {
-  width: min(390px, 33vw);
+  width: min(860px, 78vw);
+  transform: none;
 }
 
 .enemies-grid {
@@ -202,104 +196,151 @@ body,
   filter: brightness(0.9);
 }
 
+/* Modal gamer por cima do grid */
 .enemy-details-panel {
-  width: min(560px, 40vw);
-  height: 470px;
-  padding: 18px;
-  position: relative;
+  position: absolute;
+  inset: 0;
+  margin: auto;
 
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(18, 22, 28, 0.2);
+  width: min(900px, 78vw);
+  height: min(500px, 74vh);
+  padding: 34px 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.06),
+      transparent 55%
+    ),
+    rgba(12, 15, 20, 0.48);
 
   box-shadow:
-    0 0 24px rgba(0, 0, 0, 0.35),
-    inset 0 0 24px rgba(255, 255, 255, 0.03);
+    0 0 45px rgba(0, 0, 0, 0.7),
+    inset 0 0 30px rgba(255, 255, 255, 0.04);
 
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 42px;
 
-  animation: detailsAppear 0.35s ease;
+  z-index: 5;
+  animation: detailsAppearOverlay 0.35s ease;
 }
 
 .enemy-close-button {
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 16px;
+  right: 18px;
 
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 6px 10px;
+  background: rgba(10, 12, 16, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 7px 12px;
   cursor: pointer;
 
   font-family: "Cinzel", serif;
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: #e8e8e8;
 
   backdrop-filter: blur(3px);
   transition:
     border-color 0.25s ease,
     color 0.25s ease,
-    transform 0.25s ease;
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
 .enemy-close-button:hover {
-  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.42);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
 .enemy-preview {
-  width: 190px;
-  height: 290px;
+  width: 270px;
+  height: 410px;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.35);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
+
+  box-shadow:
+    0 0 25px rgba(0, 0, 0, 0.65),
+    0 0 18px rgba(255, 210, 90, 0.12);
 }
 
 .enemy-preview-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+
+  filter: contrast(1.05) brightness(0.95);
 }
 
 .enemy-description-box {
-  flex: 1;
-  height: 250px;
-  padding: 20px;
+  width: 410px;
+  min-height: 300px;
+  max-height: 360px;
+  padding: 30px 34px;
 
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(12, 16, 20, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(
+    180deg,
+    rgba(30, 34, 42, 0.45),
+    rgba(10, 12, 16, 0.35)
+  );
 
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.025);
-  backdrop-filter: blur(4px);
+  box-shadow:
+    inset 0 0 24px rgba(255, 255, 255, 0.035),
+    0 0 20px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(5px);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 14px;
+  gap: 18px;
+
+  overflow-y: auto;
+}
+
+.enemy-description-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.enemy-description-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.enemy-description-box::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .enemy-description-title {
   margin: 0;
   font-family: "Cinzel", serif;
-  font-size: 1.25rem;
-  letter-spacing: 0.07em;
-  color: #f0f0f0;
+  font-size: 1.65rem;
+  letter-spacing: 0.08em;
+  color: #f4f1ea;
   text-transform: uppercase;
+
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.18),
+    0 0 14px rgba(255, 190, 80, 0.12);
 }
 
 .enemy-description-text {
   margin: 0;
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.05rem;
-  line-height: 1.55;
-  color: rgba(240, 240, 240, 0.92);
+  font-size: 1.25rem;
+  line-height: 1.65;
+  color: rgba(245, 245, 245, 0.92);
 }
 
 .enemies-back-button {
@@ -330,6 +371,7 @@ body,
     filter: blur(4px);
     transform: scale(1.01);
   }
+
   to {
     opacity: 1;
     filter: blur(0);
@@ -337,14 +379,17 @@ body,
   }
 }
 
-@keyframes detailsAppear {
+@keyframes detailsAppearOverlay {
   from {
     opacity: 0;
-    transform: translateX(14px);
+    transform: scale(0.94) translateY(12px);
+    filter: blur(5px);
   }
+
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1) translateY(0);
+    filter: blur(0);
   }
 }
 
@@ -368,12 +413,11 @@ body,
   }
 
   .enemies-panels {
-    flex-direction: column;
+    min-height: 560px;
   }
 
   .enemies-grid-wrapper,
-  .enemies-grid-wrapper.compact,
-  .enemy-details-panel {
+  .enemies-grid-wrapper.compact {
     width: 100%;
     height: auto;
   }
@@ -383,18 +427,32 @@ body,
   }
 
   .enemy-details-panel {
+    width: min(92vw, 760px);
+    height: auto;
+    min-height: 540px;
     flex-direction: column;
-    padding-top: 50px;
+    padding: 58px 24px 28px;
+    gap: 24px;
   }
 
   .enemy-preview {
-    width: 220px;
-    height: 300px;
+    width: 240px;
+    height: 360px;
   }
 
   .enemy-description-box {
     width: 100%;
-    height: auto;
+    max-width: 560px;
+    min-height: 230px;
+    max-height: 300px;
+  }
+
+  .enemy-description-title {
+    font-size: 1.35rem;
+  }
+
+  .enemy-description-text {
+    font-size: 1.12rem;
   }
 
   .enemies-back-button {
